@@ -2,13 +2,13 @@
 
 buildPythonPackage rec {
   pname = "algebraic-data-types";
-  version = "0.1.1";
+  version = "0.1.2";
 
   src = fetchFromGitHub {
     owner = "jspahrsummers";
     repo = "adt";
-    rev = "v" + version;
-    sha256 = "1py94jsgh6wch59n9dxnwvk74psbpa1679zfmripa1qfc2218kqi";
+    rev = "v${version}";
+    sha256 = "00q76qbyfvg5vgs5sg7qc2y6fl72b16vgbpn0lgc67mwila9h4r6";
   };
 
   disabled = pythonOlder "3.6";
