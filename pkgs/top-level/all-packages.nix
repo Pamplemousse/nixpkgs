@@ -11109,6 +11109,9 @@ in
   } // (config.radare or {}))) radare2 r2-for-cutter;
 
   radare2-cutter = libsForQt5.callPackage ../development/tools/analysis/radare2/cutter.nix { };
+  r2ghidra-dec = libsForQt5.callPackage ../development/tools/analysis/radare2/packages/r2ghidra-dec.nix {
+    forR2Cutter = true;
+  };
 
   ragel = ragelStable;
 
