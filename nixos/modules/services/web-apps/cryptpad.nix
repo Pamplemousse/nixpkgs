@@ -87,9 +87,12 @@ in
       };
     };
 
-    services.cryptpad.settings = mapAttrs (_: v: mkDefault v) {
+    services.cryptpad.settings = mapAttrs (_: v: mkDefault v) rec {
       # Explicit defaults
-      httpUnsafeOrigin = "http://localhost:3000/";
+      httpUnsafeOrigin = "http://${httpAddress}:${toString httpPort}/";
+      httpAddress = "localhost";
+      httpPort = 3000;
+      safeHttpPort = httpPort + 1;
       adminEmail = "i.did.not.read.my.config@cryptpad.fr";
       filePath = "./datastore/";
       archivePath = "./data/archive";
