@@ -31,8 +31,8 @@ in
         '';
       });
     in mkOption {
-      type = topLevel;
-      default = {};
+      type = types.nullOr topLevel;
+      default = null;
       description = ''
         Cryptpad settings using Nix. Requires configFile to be null.
       '';
@@ -40,7 +40,7 @@ in
 
     configFile = mkOption {
       type = types.nullOr types.path;
-      default = "${cfg.package}/lib/node_modules/cryptpad/config/config.example.js";
+      default = null;
       defaultText = "\${cfg.package}/lib/node_modules/cryptpad/config/config.example.js";
       description = ''
         Path to the JavaScript configuration file.
@@ -59,6 +59,16 @@ in
         module.exports = ${builtins.toJSON cfg.settings};
       '';
   in mkIf cfg.enable {
+    assertions = [
+      { assertion =
+          (cfg.configFile != null && cfg.settings == null) ||
+          (cfg.configFile == null && cfg.settings != null);
+        message = ''
+          One of configFile or settings options must be non-null, but not both.
+        '';
+      }
+    ];
+
     systemd.services.cryptpad = {
       description = "Cryptpad Service";
       wantedBy = [ "multi-user.target" ];
