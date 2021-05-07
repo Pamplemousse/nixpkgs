@@ -4,23 +4,20 @@
 , runtimeShell
 , symlinkJoin
 , tree
+, wfuzz
 }:
 
 let
-  _wordlistData = {
-    dirbuster = ./dirbuster.nix;
-    nmap = ./nmap.nix;
-    rockyou = ./rockyou.nix;
-    seclists = ./seclists.nix;
-    wfuzz = ./wfuzz.nix;
-  };
-
   # the packages in the scope don't depend on each other
   # do we even need makeScope here?
   scopedWordlists = lib.makeScope pkgs.newScope (_:
-    lib.attrsets.mapAttrs
-      (name: expressionPath: callPackage expressionPath { })
-      _wordlistData
+    {
+      dirbuster = callPackage ./dirbuster.nix { };
+      nmap = callPackage ./nmap.nix { };
+      rockyou = callPackage ./rockyou.nix { };
+      seclists = callPackage ./seclists.nix { };
+      wfuzz = wfuzz.wordlists;
+    }
   );
 in
 {
