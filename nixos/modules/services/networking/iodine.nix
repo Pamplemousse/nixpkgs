@@ -91,7 +91,7 @@ in
         ip = mkOption {
           type = types.str;
           default = "";
-          description = "The assigned ip address or ip range";
+          description = "The server's ip address on the tunnel's interface. The client will be given the next ip number in the range. The default netmask is /27, can be overridden by specifying it here.";
           example = "172.16.10.1/24";
         };
 
