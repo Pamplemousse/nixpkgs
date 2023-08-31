@@ -11874,6 +11874,18 @@ final: prev:
     meta.homepage = "https://github.com/thosakwe/vim-flutter/";
   };
 
+  vim-freemarker = buildVimPluginFrom2Nix {
+    pname = "vim-freemarker";
+    version = "2017-07-08";
+    src = fetchFromGitHub {
+      owner = "andreshazard";
+      repo = "vim-freemarker";
+      rev = "993bda23e72e4c074659970c1e777cb19d8cf93e";
+      sha256 = "1dixs9dbsn6k96x315dysrkmd8d6v0g9nn8nmvsf3i7as6xag0c3";
+    };
+    meta.homepage = "https://github.com/andreshazard/vim-freemarker/";
+  };
+
   vim-fsharp = buildVimPluginFrom2Nix {
     pname = "vim-fsharp";
     version = "2018-11-13";
